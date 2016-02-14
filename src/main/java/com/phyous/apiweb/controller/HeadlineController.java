@@ -7,19 +7,21 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ro.pippo.controller.Controller;
 import ro.pippo.core.Param;
+import ro.pippo.core.util.StringUtils;
 
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class HeadlineController extends Controller {
 
-    private static final String sourceUrl = "http://www.techmeme.com/";
+    private static final String baseUrl = "http://www.techmeme.com/";
 
     public void getHeadlines(@Param("date") String headlineDate) {
         try {
-            Document doc = Jsoup.connect(sourceUrl).get();
+            Document doc = Jsoup.connect(generateWebUrl(headlineDate)).get();
             Elements topLinks = doc.select("#topcol1 .clus");
 
             List<ImmutableHeadline> headlines = topLinks.stream()
@@ -32,7 +34,6 @@ public class HeadlineController extends Controller {
                     String title = mainStory.select("strong a").first().ownText();
                     String summary = mainStory.ownText();
                     String url = mainStory.select("strong a").attr("href");
-                    Optional<List<ImmutableHeadline>> relatedHeadlines = relatedHeadlines(x);
 
                     return ImmutableHeadline.builder()
                         .reporter(reporter)
@@ -40,29 +41,29 @@ public class HeadlineController extends Controller {
                         .title(title)
                         .summary(summary)
                         .url(url)
-                        .relatedHeadlines(relatedHeadlines)
                         .build();
                 })
                 .collect(Collectors.toList());
 
             getResponse().json(headlines);
-        } catch (IOException e) {
+        } catch (Exception e) {
             getResponse().internalError();
         }
     }
-
-    private Optional<List<ImmutableHeadline>> relatedHeadlines(Element topLink) {
-        Elements relatedHeadlineElements = topLink.select(".itc1 .itc2 .item div.dbpt > span.bls").first().children();
-        return Optional.of(
-            relatedHeadlineElements.stream()
-                .map(relatedHl -> {
-                    Element hlElement = relatedHl.select("a").first();
-                    return ImmutableHeadline.builder()
-                        .url(hlElement.attr("href"))
-                        .source(hlElement.ownText())
-                        .build();
-                })
-                .collect(Collectors.toList())
-        );
+    
+    private String generateWebUrl(String dateParam) {
+        if (StringUtils.isNullOrEmpty(dateParam)) {
+            return baseUrl;
+        }
+        
+        try {
+            final String formattedDate = 
+                LocalDate
+                    .parse(dateParam)
+                    .format(DateTimeFormatter.ofPattern("yyMMdd"));
+            return String.format("%s/%s/h1230", baseUrl, formattedDate);
+        } catch (DateTimeParseException e) {
+            return baseUrl;
+        }
     }
 }
