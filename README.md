@@ -19,3 +19,23 @@ Specifically, we're going to create a web service that scrapes [techmeme.com](ht
 4. Make a request to the server. 
     * Let's get the tech headlines form new years day in 2015: ```http://localhost:8081/headlines?date=2015-01-01```
     * Let's get the tech headlines for today: ```http://localhost:8081/headlines```
+    
+### Sample output:
+```json
+[
+{
+reporter: "Sarah Frier",
+source: "Bloomberg",
+title: "Snapchat raises $485.6M at $10B+ valuation from 23 investors",
+summary: "  —  Snapchat Raises $485.6 Million to Close Out Big Fundraising Year  —  Snapchat Inc., among a pack of elite technology startups that has attained a valuation of $10 billion or more, capped the year with a filing that disclosed it raised $485.6 million.",
+url: "http://www.bloomberg.com/news/2015-01-01/snapchat-raises-485-6-million-to-close-out-big-fundraising-year.html"
+},
+{
+reporter: "William Turton",
+source: "The Daily Dot",
+title: "U.K. police allegedly arrest Lizard Squad hacker",
+summary: "… Lizard Squad took credit for the Dec. 25 distributed denial-of-service (DDoS) attacks against the PlayStation Network and Xbox Live.  DDoS attacks overwhelm a network with too much traffic, leaving targeted networks inaccessible for legitimate users.",
+url: "http://www.dailydot.com/crime/lizard-squad-vinnie-omari-arrested/"
+}
+]
+```
