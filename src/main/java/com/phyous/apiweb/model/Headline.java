@@ -12,10 +12,10 @@ import java.util.Optional;
 @JsonSerialize(as = ImmutableHeadline.class)
 public interface Headline {
 
-    Optional<String> reporter();
-    Optional<String> source();
-    Optional<String> title();
-    Optional<String> summary();
-    Optional<String> url();
+    String reporter();
+    String source();
+    String title();
+    String summary();
+    String url();
     Optional<List<ImmutableHeadline>> relatedHeadlines();
 }
