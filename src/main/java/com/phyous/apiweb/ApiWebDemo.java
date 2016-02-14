@@ -8,7 +8,6 @@ public class ApiWebDemo {
     
     public static void main(String[] args) {
         Pippo pippo = new Pippo(new ApiWebApp());
-        pippo.getServer().getSettings().port(8081);
         pippo.start();
     }
     

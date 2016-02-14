@@ -15,8 +15,8 @@ Specifically, we're going to create a web service that scrapes [techmeme.com](ht
 
 1. Be sure to have java 8 & maven installed
 2. Compile the source code: ```mvn package```
-3. Run the server (defaults to port 8081): ```java -jar target/apiweb-1.0-SNAPSHOT.jar```
-4. Make a request to the server. 
+3. Run the server: ```java -jar target/apiweb-1.0-SNAPSHOT.jar```
+4. Make a request to the server (I've set the server port to 8081 in application.properties). 
     * Let's get the tech headlines form new years day in 2015: ```http://localhost:8081/headlines?date=2015-01-01```
     * Let's get the tech headlines for today: ```http://localhost:8081/headlines```
     
