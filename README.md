@@ -8,7 +8,7 @@ Specifically, we're going to create a web service that scrapes [techmeme.com](ht
 
 * [Immutables](http://immutables.github.io/) --- Used to create our models. By using a handful of very powerful annotations along with code generation, we'll be able to create immutable objects and builders to represent our data models.
 * [Jsoup](https://github.com/jhy/jsoup/) --- Used for retrieving html and parsing it. This is an older library that has stood the test of time. Simply pass in css selectors to get the relevant html sections needed.
-* [Pippo](http://www.pippo.ro/) --- Used as our webserver. This is a relatively new webserver for java that combines a very simple interface with a minimal footprint and a high degree of customizability. Reminds me of a [Dropwizard](http://www.dropwizard.io/0.9.2/docs/) with a simpler interface.
+* [Pippo](http://www.pippo.ro/) --- Used as our web framework. This is a relatively new web framework for java that combines a very simple interface with a minimal footprint and a high degree of customizability. Reminds me of a [Dropwizard](http://www.dropwizard.io/0.9.2/docs/) with a simpler interface.
 * [Java 8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html) --- We'll be making use of Java 8 streams and optionals to process the incoming data. 
 
 ### Setup Instructions
